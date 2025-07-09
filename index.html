@@ -188,7 +188,7 @@
         // 艾森豪威尔图
         var option2 = {
             title: {
-                text: '艾森豪威尔矩阵 - 数据质量优先级分析',
+                text: '艾森豪威尔矩阵',
                 textStyle: { fontSize: 24 },
                 left: 'center'
             },
@@ -221,7 +221,7 @@
                 }
             },
             yAxis: {
-                name: '问题程度',
+                name: '问题严重性',
                 nameLocation: 'middle',
                 nameGap: 40,
                 nameTextStyle: { fontSize: 16 },
@@ -327,7 +327,8 @@
                 axisLabel: { 
                     interval: 0, 
                     rotate: 45,
-                    fontSize: 10
+                    fontSize: 16,
+                    color: '#000'
                 }
             },
             yAxis: {
@@ -336,7 +337,13 @@
                 axisLabel: {
                     formatter: function(value) {
                         return value.toFixed(1);
-                    }
+                    },
+                    fontSize: 16,
+                    color: '#000'
+                },
+                nameTextStyle: {
+                    fontSize: 16,
+                    color: '#000'
                 }
             },
             series: [
@@ -344,7 +351,7 @@
                     name: '分数',
                     type: 'bar',
                     data: [20.0, 57.37585199610516, 74.38427596936454, 57.37572252918245, 88.15247236442316, 100.0, 92.97375801282051, 69.43355921194085, 100.0, 20.833333333333336, 55.55555555555556, 72.75403930879118],
-                    itemStyle: { color: '#e6194b' }
+                    itemStyle: { color: '#f67280' }
                 }
             ]
         };
@@ -374,7 +381,8 @@
                 axisLabel: { 
                     interval: 0, 
                     rotate: 45,
-                    fontSize: 10
+                    fontSize: 16,
+                    color: '#000'
                 }
             },
             yAxis: {
@@ -383,7 +391,13 @@
                 axisLabel: {
                     formatter: function(value) {
                         return value.toFixed(1);
-                    }
+                    },
+                    fontSize: 16,
+                    color: '#000'
+                },
+                nameTextStyle: {
+                    fontSize: 16,
+                    color: '#000'
                 }
             },
             series: [
@@ -391,7 +405,7 @@
                     name: '分数',
                     type: 'bar',
                     data: [60.0, 66.37727272727273, 72.45610869486832, 64.10806263293524, 92.86554458399735, 100.0, 100.0, 60.67245381298295, 100.0, 58.333333333333336, 100.0, 91.62206474491468],
-                    itemStyle: { color: '#3cb44b' }
+                    itemStyle: { color: '#8ec6ad' }
                 }
             ]
         };
