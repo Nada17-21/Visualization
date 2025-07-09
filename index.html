@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 1240px;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .item {
+            width: 1000px;
+            height: 1000px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="main0" class="item"></div>
+        <div id="main1" class="item"></div>
+        <div id="main2" class="item"></div>
+        <div id="main3" class="item"></div>
+        <button id="switchButton" style="
+            margin: 10px auto;
+            display: block;
+            padding: 10px 20px;
+            background-color: #4b5d67;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        ">切换到数据制备后</button>
+    </div>
+    <script>
+        var option0 = {
+            title: { text: '雷达图', textStyle: { fontSize: 24 } },
+            legend: { data: ['数据制备前', '数据制备后'], textStyle: { fontSize: 24 } },
+            radar: {
+                indicator: [
+                    { name: '数据量', max: 100, textStyle: { color: '#000', fontSize: 24 } },
+                    { name: '数据内在质量', max: 100, textStyle: { color: '#000', fontSize: 24 } },
+                    { name: '数据表示质量', max: 100, textStyle: { color: '#000', fontSize: 24 } },
+                    { name: '数据上下文质量', max: 100, textStyle: { color: '#000', fontSize: 24 } },
+                    { name: '数据冗余', max: 100, textStyle: { color: '#000', fontSize: 24 } },
+                ],
+                name: { color: '#000', fontSize: 24 }
+            },
+            series: [{
+                name: '雷达图',
+                type: 'radar',
+                data: [
+                    { value: [59.45766457181505, 96.48687900641025, 84.71677960597043, 38.19444444444444, 80.45325583660717], name: '数据制备前' },
+                    { value: [71.16139772781472, 100.0, 80.33622690649148, 79.16666666666667, 92.24380466445601], name: '数据制备后' }
+                ]
+            }]
+        };
+        var option1 = {
+            title: { text: '旭日图', textStyle: { fontSize: 24 } },
+            series: [
+                {
+                    type: 'sunburst',
+                    radius: ['15%', '70%'],
+                    sort: undefined,
+                    emphasis: { focus: 'ancestor' },
+                    data: [
+                        {
+                            name: '数据量',
+                            children: [
+                                { name: '时间粒度覆盖率', value: 20.0, itemStyle: { color: '#8ec6ad' }, label: { color: '#000' } },
+                                { name: '季节性强度', value: 57.37585199610516, itemStyle: { color: '#d3c6a6' }, label: { color: '#000' } },
+                                { name: '趋势强度', value: 57.37572252918245, itemStyle: { color: '#bb8e62' }, label: { color: '#000' } },
+                                { name: '主频强度', value: 74.38427596936454, itemStyle: { color: '#e3963e' }, label: { color: '#000' } },
+                                { name: '样本均衡性', value: 88.15247236442316, itemStyle: { color: '#e1cfa9' }, label: { color: '#000' } }
+                            ],
+                            itemStyle: { color: '#4b5d67' },
+                            label: { color: '#000' }
+                        },
+                        {
+                            name: '数据内在质量',
+                            children: [
+                                { name: '数据完整性', value: 100.0, itemStyle: { color: '#b7b5e4' }, label: { color: '#000' } },
+                                { name: '标签一致性', value: 92.97375801282051, itemStyle: { color: '#8b7b6b' }, label: { color: '#000' } }
+                            ],
+                            itemStyle: { color: '#6c5b7b' },
+                            label: { color: '#000' }
+                        },
+                        {
+                            name: '数据表示质量',
+                            children: [
+                                { name: '时序平稳性', value: 69.43355921194085, itemStyle: { color: '#f67280' }, label: { color: '#000' } },
+                                { name: '日期标注完整性', value: 100.0, itemStyle: { color: '#c06c84' }, label: { color: '#000' } }
+                            ],
+                            itemStyle: { color: '#355c7d' },
+                            label: { color: '#000' }
+                        },
+                        {
+                            name: '数据上下文质量',
+                            children: [
+                                { name: '领域知识多样性', value: 55.55555555555556, itemStyle: { color: '#99b898' }, label: { color: '#000' } },
+                                { name: '领域知识完整性', value: 20.833333333333336, itemStyle: { color: '#feceab' }, label: { color: '#000' } }
+                            ],
+                            itemStyle: { color: '#e84a5f' },
+                            label: { color: '#000' }
+                        },
+                        {
+                            name: '数据冗余',
+                            children: [
+                                { name: '样本均衡性', value: 88.15247236442316, itemStyle: { color: '#f8b195' }, label: { color: '#000' } },
+                                { name: '特征独立性', value: 72.75403930879118, itemStyle: { color: '#f67280' }, label: { color: '#000' } }
+                            ],
+                            itemStyle: { color: '#355c7d' },
+                            label: { color: '#000' }
+                        }
+                    ],
+                    label: {
+                        color: '#000',
+                        fontSize: 18,
+                        textBorderColor: '#fff',
+                        textBorderWidth: 2,
+                        formatter: function (param) {
+                            return param.name;
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (param) {
+                            if (param.value !== undefined) {
+                                return param.name + ': ' + param.value.toFixed(2);
+                            }
+                            return param.name;
+                        }
+                    },
+                    levels: [
+                        {},
+                        {},
+                        {
+                            label: {
+                                position: 'inside',
+                                rotate: 'radial',
+                                color: '#000',
+                                fontSize: 18
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+
+
+        const rawData = [
+            // 数据量
+            { primary: '数据量', secondary: '时间粒度覆盖率', importance: 0.222, problem: 0.800, urgency: 0.178, score: 20.000 },
+            { primary: '数据量', secondary: '季节性强度', importance: 0.333, problem: 0.426, urgency: 0.142, score: 57.376 },
+            { primary: '数据量', secondary: '主频强度', importance: 0.278, problem: 0.256, urgency: 0.071, score: 74.384 },
+            { primary: '数据量', secondary: '趋势强度', importance: 0.056, problem: 0.426, urgency: 0.024, score: 57.376 },
+            { primary: '数据量', secondary: '样本均衡性', importance: 0.111, problem: 0.118, urgency: 0.013, score: 88.152 },
+            // 数据内在质量
+            { primary: '数据内在质量', secondary: '标签一致性', importance: 0.100, problem: 0.070, urgency: 0.007, score: 92.974 },
+            { primary: '数据内在质量', secondary: '数据完整性', importance: 0.900, problem: 0.000, urgency: 0.000, score: 100.000 },
+            // 数据表示质量
+            { primary: '数据表示质量', secondary: '时序平稳性', importance: 0.800, problem: 0.306, urgency: 0.245, score: 69.434 },
+            { primary: '数据表示质量', secondary: '日期标注完整性', importance: 0.200, problem: 0.000, urgency: 0.000, score: 100.000 },
+            // 数据上下文质量
+            { primary: '数据上下文质量', secondary: '领域知识完整性', importance: 0.700, problem: 0.708, urgency: 0.496, score: 29.167 },
+            { primary: '数据上下文质量', secondary: '领域知识多样性', importance: 0.300, problem: 0.444, urgency: 0.133, score: 55.556 },
+            // 数据冗余
+            { primary: '数据冗余', secondary: '特征独立性', importance: 0.600, problem: 0.272, urgency: 0.163, score: 72.754 },
+            { primary: '数据冗余', secondary: '样本均衡性', importance: 0.400, problem: 0.118, urgency: 0.047, score: 88.152 }
+        ];
+
+        // 艾森豪威尔图
+        var option2 = {
+            title: {
+                text: '艾森豪威尔矩阵 - 数据质量优先级分析',
+                textStyle: { fontSize: 24 },
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function (param) {
+                    return param.data.name + '<br/>' +
+                        '重要性: ' + (param.data.importance * 100).toFixed(1) + '%<br/>' +
+                        '问题程度: ' + (param.data.problem * 100).toFixed(1) + '%<br/>' +
+                        '紧急程度: ' + (param.data.urgency * 100).toFixed(1) + '%';
+                }
+            },
+            legend: {
+                data: ['数据量', '数据内在质量', '数据表示质量', '数据上下文质量', '数据冗余'],
+                textStyle: { fontSize: 16 },
+                top: 40
+            },
+            xAxis: {
+                name: '重要性',
+                nameLocation: 'middle',
+                nameGap: 30,
+                nameTextStyle: { fontSize: 16 },
+                min: -1,
+                max: 1,
+                axisLabel: {
+                    formatter: function (value) {
+                        return (value * 100).toFixed(0) + '%';
+                    },
+                    fontSize: 14
+                }
+            },
+            yAxis: {
+                name: '问题程度',
+                nameLocation: 'middle',
+                nameGap: 40,
+                nameTextStyle: { fontSize: 16 },
+                min: -1,
+                max: 1,
+                axisLabel: {
+                    formatter: function (value) {
+                        return (value * 100).toFixed(0) + '%';
+                    },
+                    fontSize: 14
+                }
+            },
+            series: [
+                {
+                    name: '数据量',
+                    type: 'scatter',
+                    data: rawData.filter(item => item.primary === '数据量').map(item => ({
+                        value: [item.importance * 2 - 1, item.problem * 2 - 1],
+                        name: item.secondary,
+                        importance: item.importance,
+                        problem: item.problem,
+                        urgency: item.urgency,
+                        symbolSize: item.urgency * 200 + 10
+                    })),
+                    itemStyle: { color: '#4b5d67' }
+                },
+                {
+                    name: '数据内在质量',
+                    type: 'scatter',
+                    data: rawData.filter(item => item.primary === '数据内在质量').map(item => ({
+                        value: [item.importance * 2 - 1, item.problem * 2 - 1],
+                        name: item.secondary,
+                        importance: item.importance,
+                        problem: item.problem,
+                        urgency: item.urgency,
+                        symbolSize: item.urgency * 200 + 10
+                    })),
+                    itemStyle: { color: '#6c5b7b' }
+                },
+                {
+                    name: '数据表示质量',
+                    type: 'scatter',
+                    data: rawData.filter(item => item.primary === '数据表示质量').map(item => ({
+                        value: [item.importance * 2 - 1, item.problem * 2 - 1],
+                        name: item.secondary,
+                        importance: item.importance,
+                        problem: item.problem,
+                        urgency: item.urgency,
+                        symbolSize: item.urgency * 200 + 10
+                    })),
+                    itemStyle: { color: '#355c7d' }
+                },
+                {
+                    name: '数据上下文质量',
+                    type: 'scatter',
+                    data: rawData.filter(item => item.primary === '数据上下文质量').map(item => ({
+                        value: [item.importance * 2 - 1, item.problem * 2 - 1],
+                        name: item.secondary,
+                        importance: item.importance,
+                        problem: item.problem,
+                        urgency: item.urgency,
+                        symbolSize: item.urgency * 200 + 10
+                    })),
+                    itemStyle: { color: '#e84a5f' }
+                },
+                {
+                    name: '数据冗余',
+                    type: 'scatter',
+                    data: rawData.filter(item => item.primary === '数据冗余').map(item => ({
+                        value: [item.importance * 2 - 1, item.problem * 2 - 1],
+                        name: item.secondary,
+                        importance: item.importance,
+                        problem: item.problem,
+                        urgency: item.urgency,
+                        symbolSize: item.urgency * 200 + 10
+                    })),
+                    itemStyle: { color: '#355c7d' }
+                }
+            ]
+        };
+
+        var option3 = {
+            title: { 
+                text: '二级指标分数对比 (数据制备前)', 
+                textStyle: { fontSize: 24 },
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '日期标注完整性', '领域知识完整性', '领域知识多样性', '特征独立性'],
+                axisLabel: { 
+                    interval: 0, 
+                    rotate: 45,
+                    fontSize: 10
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '分数',
+                axisLabel: {
+                    formatter: function(value) {
+                        return value.toFixed(1);
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '分数',
+                    type: 'bar',
+                    data: [20.0, 57.37585199610516, 74.38427596936454, 57.37572252918245, 88.15247236442316, 100.0, 92.97375801282051, 69.43355921194085, 100.0, 20.833333333333336, 55.55555555555556, 72.75403930879118],
+                    itemStyle: { color: '#4b5d67' }
+                }
+            ]
+        };
+
+        // 第二组数据 - 数据制备后
+        var option3_alt = {
+            title: { 
+                text: '二级指标分数对比 (数据制备后)', 
+                textStyle: { fontSize: 24 },
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '日期标注完整性', '领域知识完整性', '领域知识多样性', '特征独立性'],
+                axisLabel: { 
+                    interval: 0, 
+                    rotate: 45,
+                    fontSize: 10
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '分数',
+                axisLabel: {
+                    formatter: function(value) {
+                        return value.toFixed(1);
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '分数',
+                    type: 'bar',
+                    data: [60.0, 66.37727272727273, 72.45610869486832, 64.10806263293524, 92.86554458399735, 100.0, 100.0, 60.67245381298295, 100.0, 58.333333333333336, 100.0, 91.62206474491468],
+                    itemStyle: { color: '#6c5b7b' }
+                }
+            ]
+        };
+
+        // 添加切换按钮
+        var currentOption3 = option3;
+        var isOption3Alt = false;
+
+        // 创建切换按钮
+        document.getElementById('switchButton').onclick = function() {
+            isOption3Alt = !isOption3Alt;
+            currentOption3 = isOption3Alt ? option3_alt : option3;
+            switchButton.textContent = isOption3Alt ? '切换到数据制备前' : '切换到数据制备后';
+            chart3.setOption(currentOption3);
+        };
+
+        var chart0 = echarts.init(document.getElementById('main0'));
+        chart0.setOption(option0);
+        var chart1 = echarts.init(document.getElementById('main1'));
+        chart1.setOption(option1);
+        var chart2 = echarts.init(document.getElementById('main2'));
+        chart2.setOption(option2);
+        var chart3 = echarts.init(document.getElementById('main3'));
+        chart3.setOption(option3);
+
+    </script>
+</body>
+
+</html>
