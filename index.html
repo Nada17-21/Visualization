@@ -66,8 +66,8 @@
                 name: '雷达图',
                 type: 'radar',
                 data: [
-                    { value: [59.45766457181505, 96.48687900641025, 84.71677960597043, 38.19444444444444, 80.45325583660717], name: '数据制备前' },
-                    { value: [71.16139772781472, 100.0, 80.33622690649148, 79.16666666666667, 92.24380466445601], name: '数据制备后' }
+                    { value: [59.45766457181505, 96.48687900641025, 34.71677960597042, 42.361111111111114, 80.45325583660717], name: '数据制备前' },
+                    { value: [70.9805001443088, 76.83535526761517, 67.60516533619631, 79.16666666666667, 91.79963820644124], name: '数据制备后' }
                 ]
             }]
         };
@@ -79,6 +79,7 @@
                     radius: ['15%', '70%'],
                     sort: undefined,
                     emphasis: { focus: 'ancestor' },
+                    nodeClick: false,
                     data: [
                         {
                             name: '数据量',
@@ -105,7 +106,7 @@
                             name: '数据表示质量',
                             children: [
                                 { name: '时序平稳性', value: 69.43355921194085, itemStyle: { color: '#f67280' }, label: { color: '#000' } },
-                                { name: '日期标注完整性', value: 100.0, itemStyle: { color: '#c06c84' }, label: { color: '#000' } }
+                                { name: '时间特征完备度', value: 0.1, itemStyle: { color: '#c06c84' }, label: { color: '#000' } }
                             ],
                             itemStyle: { color: '#355c7d' },
                             label: { color: '#000' }
@@ -114,7 +115,7 @@
                             name: '数据上下文质量',
                             children: [
                                 { name: '领域知识多样性', value: 55.55555555555556, itemStyle: { color: '#99b898' }, label: { color: '#000' } },
-                                { name: '领域知识完整性', value: 20.833333333333336, itemStyle: { color: '#feceab' }, label: { color: '#000' } }
+                                { name: '领域知识完整性', value: 29.166666666666668, itemStyle: { color: '#feceab' }, label: { color: '#000' } }
                             ],
                             itemStyle: { color: '#e84a5f' },
                             label: { color: '#000' }
@@ -135,6 +136,9 @@
                         textBorderColor: '#fff',
                         textBorderWidth: 2,
                         formatter: function (param) {
+                            if (param.name === '时间特征完备度') {
+                                return param.name + '\n(0.0)';
+                            }
                             return param.name;
                         }
                     },
@@ -142,6 +146,9 @@
                         trigger: 'item',
                         formatter: function (param) {
                             if (param.value !== undefined) {
+                                if (param.name === '时间特征完备度') {
+                                    return param.name + ': 0.00';
+                                }
                                 return param.name + ': ' + param.value.toFixed(2);
                             }
                             return param.name;
@@ -166,17 +173,17 @@
 
         const rawData = [
             // 数据量
-            { primary: '数据量', secondary: '时间粒度覆盖率', importance: 0.222, problem: 0.800, urgency: 0.178, score: 20.000 },
-            { primary: '数据量', secondary: '季节性强度', importance: 0.333, problem: 0.426, urgency: 0.142, score: 57.376 },
-            { primary: '数据量', secondary: '主频强度', importance: 0.278, problem: 0.256, urgency: 0.071, score: 74.384 },
-            { primary: '数据量', secondary: '趋势强度', importance: 0.056, problem: 0.426, urgency: 0.024, score: 57.376 },
-            { primary: '数据量', secondary: '样本均衡性', importance: 0.111, problem: 0.118, urgency: 0.013, score: 88.152 },
+            { primary: '数据量', secondary: '时间粒度覆盖率', importance: 0.300, problem: 0.800, urgency: 0.240, score: 20.000 },
+            { primary: '数据量', secondary: '季节性强度', importance: 0.300, problem: 0.426, urgency: 0.128, score: 57.376 },
+            { primary: '数据量', secondary: '主频强度', importance: 0.250, problem: 0.256, urgency: 0.064, score: 74.384 },
+            { primary: '数据量', secondary: '趋势强度', importance: 0.050, problem: 0.426, urgency: 0.021, score: 57.376 },
+            { primary: '数据量', secondary: '样本均衡性', importance: 0.100, problem: 0.118, urgency: 0.012, score: 88.152 },
             // 数据内在质量
             { primary: '数据内在质量', secondary: '标签一致性', importance: 0.100, problem: 0.070, urgency: 0.007, score: 92.974 },
             { primary: '数据内在质量', secondary: '数据完整性', importance: 0.900, problem: 0.000, urgency: 0.000, score: 100.000 },
             // 数据表示质量
-            { primary: '数据表示质量', secondary: '时序平稳性', importance: 0.800, problem: 0.306, urgency: 0.245, score: 69.434 },
-            { primary: '数据表示质量', secondary: '日期标注完整性', importance: 0.200, problem: 0.000, urgency: 0.000, score: 100.000 },
+            { primary: '数据表示质量', secondary: '时间特征完备度', importance: 0.400, problem: 1.000, urgency: 0.400, score: 0.000 },
+            { primary: '数据表示质量', secondary: '时序平稳性', importance: 0.600, problem: 0.306, urgency: 0.183, score: 69.434 },
             // 数据上下文质量
             { primary: '数据上下文质量', secondary: '领域知识完整性', importance: 0.700, problem: 0.708, urgency: 0.496, score: 29.167 },
             { primary: '数据上下文质量', secondary: '领域知识多样性', importance: 0.300, problem: 0.444, urgency: 0.133, score: 55.556 },
@@ -197,7 +204,7 @@
                 formatter: function (param) {
                     return param.data.name + '<br/>' +
                         '重要性: ' + (param.data.importance * 100).toFixed(1) + '%<br/>' +
-                        '问题程度: ' + (param.data.problem * 100).toFixed(1) + '%<br/>' +
+                        '问题严重性: ' + (param.data.problem * 100).toFixed(1) + '%<br/>' +
                         '紧急程度: ' + (param.data.urgency * 100).toFixed(1) + '%';
                 }
             },
@@ -323,7 +330,7 @@
             },
             xAxis: {
                 type: 'category',
-                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '日期标注完整性', '领域知识完整性', '领域知识多样性', '特征独立性'],
+                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '时间特征完备度', '领域知识完整性', '领域知识多样性', '特征独立性'],
                 axisLabel: { 
                     interval: 0, 
                     rotate: 45,
@@ -350,7 +357,7 @@
                 {
                     name: '分数',
                     type: 'bar',
-                    data: [20.0, 57.37585199610516, 74.38427596936454, 57.37572252918245, 88.15247236442316, 100.0, 92.97375801282051, 69.43355921194085, 100.0, 20.833333333333336, 55.55555555555556, 72.75403930879118],
+                    data: [20.0, 57.37585199610516, 57.37572252918245, 74.38427596936454, 88.15247236442316, 100.0, 92.97375801282051, 69.43355921194085, 0.0, 29.166666666666668, 55.55555555555556, 72.75403930879118],
                     itemStyle: { color: '#f67280' }
                 }
             ]
@@ -377,7 +384,7 @@
             },
             xAxis: {
                 type: 'category',
-                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '日期标注完整性', '领域知识完整性', '领域知识多样性', '特征独立性'],
+                data: ['时间粒度覆盖率', '季节性强度', '主频强度', '趋势强度', '样本均衡性', '数据完整性', '标签一致性', '时序平稳性', '时间特征完备度', '领域知识完整性', '领域知识多样性', '特征独立性'],
                 axisLabel: { 
                     interval: 0, 
                     rotate: 45,
@@ -404,7 +411,7 @@
                 {
                     name: '分数',
                     type: 'bar',
-                    data: [60.0, 66.37727272727273, 72.45610869486832, 64.10806263293524, 92.86554458399735, 100.0, 100.0, 60.67245381298295, 100.0, 58.333333333333336, 100.0, 91.62206474491468],
+                    data: [60.0, 66.73272357723577, 64.20545686741252, 71.96874516910225, 91.99557510779348, 100.0, 53.67071053523035, 61.179822302420064, 74.03050836997257, 58.333333333333336, 100.0, 91.60370130508899],
                     itemStyle: { color: '#8ec6ad' }
                 }
             ]
